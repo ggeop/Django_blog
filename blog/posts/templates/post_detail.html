@@ -1,17 +1,15 @@
-<!--DOCTYPE html -->
+{% extends "base.html" %}
 
-<html>
+{% block head_title %}
+{{instance.title}} | {{block.super}}
+{% endblock head_title %}
 
-<body>
-<h1>{{title}}is working</h1>
+{% block content %}
 
+<h1> {{title}}</h1>
 {{instance.content}}<br/>
 {{instance.timestamp}}<br/>
 {{instance.updated}}<br/>
 {{instance.id}}<br/>
 
-
-
-</body>
-
-</html>
+{% endblock content %}
