@@ -6,8 +6,8 @@ Play with Django framework based on Coding For [*Entrepreneurs tutorials*](https
 * [*Django 1.8*](https://docs.djangoproject.com/en/2.1/releases/1.8/)
 
 ## Setup Environment
-We create our virtual env with virtualenv.
-Install virtualenv if you don't have install it yet
+Create virtual env with virtualenv.
+Install virtualenv if you don't have installed yet
 ```bash
 pip install virtualenv
 ```
