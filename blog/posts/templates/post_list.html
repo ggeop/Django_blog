@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <div class='col-sm-6 col-sm-offset-3'>
@@ -28,22 +27,22 @@
     {% endfor %}
 
     <div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
-        {% endif %}
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
+            {% endif %}
 
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
+                <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
         </span>
-
-        {% if object_list.has_next %}
-            <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
-            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
+    </div>
 </div>
 
-</div>
 
 {% endblock content %}
