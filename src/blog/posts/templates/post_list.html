@@ -2,47 +2,47 @@
 {% block content %}
 
 <div class='col-lg-8 col-md-10 mx-auto'>
-    </br>
-    <form method='GET' action=''>
-        <input class="form-control" type="text" name='q' placeholder="Search" aria-label="Search" value = "{{request.GET.q}}">
-    </form>
+    <!-- Blog Post -->
     {% for obj in object_list %}
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="thumbnail">
-                    {% if obj.image %}
-                        <img src='{{obj.image.url}}' class='img-responsive'/>
-                    {% endif %}
-                    <div class="caption">
-                        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %}{% if obj.publish.date > today %}<h3> Staff only: Future Post </h3>{% endif %}
-                        <h2><a href='{{obj.get_absolute_url}}'>{{obj.title}} </a><small>{{obj.publish | timesince}}</small></h2>
-                        {% if obj.user.get_full_name %}<p>Author: {{obj.user.get_full_name}}</p>{% endif %}
-                        <p>{{obj.content|linebreaks|truncatechars:120}}</p>
-                        <p><a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">View</a></p>
+        <div class="card mb-4">
+            {% if obj.image %}<img src='{{obj.image.url}}' class='img-responsive'/>{% endif %}
+            <div class="card-body">
+                    <div class="card-title">
+                        <h2 href='{{obj.get_absolute_url}}'>{{obj.title}}</h2>
                     </div>
-                </div>
+                        <p class="card-text">{{obj.content|linebreaks|truncatechars:120}}</p>
+                        <a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">Read More &rarr;</a>
             </div>
-            </hr>
+            <div class="card-footer text-muted">
+                {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %}{% if obj.publish.date > today %}<h3> Staff only: Future Post </h3>{% endif %}
+                Posted on: {{obj.publish | timesince}}
+                {% if obj.user.get_full_name %}<p>Author: {{obj.user.get_full_name}}</p>{% endif %}
+            </div>
         </div>
     {% endfor %}
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if object_list.has_previous %}
-                <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-            </span>
-
-            {% if object_list.has_next %}
-                <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
-                <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
 </div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
+            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</br>
+
 
 
 {% endblock content %}
