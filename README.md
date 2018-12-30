@@ -31,13 +31,4 @@ source py_env/bin/activate
 python manage.py runserver
 ```
 
-## Blog Preview
-
-### Posts list
-
-![alt text](https://github.com/ggeop/Django_blog/blob/master/img/Posts.png)
-
-### Post Preview
-
-![alt text](https://github.com/ggeop/Django_blog/blob/master/img/Posts.png)
 
