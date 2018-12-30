@@ -1,5 +1,5 @@
 # Django Blog :clipboard:
-I play with Django framework based on Coding For [*Entrepreneurs tutorials*](https://github.com/codingforentrepreneurs). 
+Play with Django framework based on Coding For [*Entrepreneurs tutorials*](https://github.com/codingforentrepreneurs). 
 
 ## Requirements
 * [*Python 3.x*](https://www.python.org/downloads/release/python-360/)
@@ -40,8 +40,4 @@ python manage.py runserver
 ### Post Preview
 
 ![alt text](https://github.com/ggeop/Django_blog/blob/master/img/Posts.png)
-
-
-
-
 
