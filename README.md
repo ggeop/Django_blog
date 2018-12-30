@@ -33,10 +33,12 @@ python manage.py runserver
 
 ## Blog Preview
 
-Posts list
+### Posts list
+
 ![alt text](https://github.com/ggeop/Django_blog/blob/master/img/Posts.png)
 
-Post Preview
+### Post Preview
+
 ![alt text](https://github.com/ggeop/Django_blog/blob/master/img/Posts.png)
 
 
