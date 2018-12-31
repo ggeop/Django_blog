@@ -1,48 +1,107 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class='col-lg-8 col-md-10 mx-auto'>
-    <!-- Blog Post -->
-    {% for obj in object_list %}
-        <div class="card mb-4">
-            {% if obj.image %}<img src='{{obj.image.url}}' class='img-responsive'/>{% endif %}
-            <div class="card-body">
-                    <div class="card-title">
-                        <h2 href='{{obj.get_absolute_url}}'>{{obj.title}}</h2>
-                    </div>
-                        <p class="card-text">{{obj.content|linebreaks|truncatechars:120}}</p>
-                        <a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">Read More &rarr;</a>
+<div class="col-md-8">
+
+    <h1 class="my-4">Posts</h1>
+
+    <div class='col-lg-8 col-md-10 mx-auto'>
+
+        <!-- New post Button -->
+         <a href="create" class="btn btn-primary btn-lg btn-block" role="button">New Post!</a>
+
+        </br>
+        <!-- Blog Post -->
+        {% for obj in object_list %}
+            <div class="card mb-4">
+                {% if obj.image %}<img src='{{obj.image.url}}' class='img-responsive'/>{% endif %}
+                <div class="card-body">
+                        <div class="card-title">
+                            <h2 href='{{obj.get_absolute_url}}'>{{obj.title}}</h2>
+                        </div>
+                            <p class="card-text">{{obj.content|linebreaks|truncatechars:120}}</p>
+                            <a href="{{obj.get_absolute_url}}" class="btn btn-primary" role="button">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %}{% if obj.publish.date > today %}<h3> Staff only: Future Post </h3>{% endif %}
+                    Posted on: {{obj.publish | timesince}}
+                    {% if obj.user.get_full_name %}<p>Author: {{obj.user.get_full_name}}</p>{% endif %}
+                </div>
             </div>
-            <div class="card-footer text-muted">
-                {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %}{% if obj.publish.date > today %}<h3> Staff only: Future Post </h3>{% endif %}
-                Posted on: {{obj.publish | timesince}}
-                {% if obj.user.get_full_name %}<p>Author: {{obj.user.get_full_name}}</p>{% endif %}
+        {% endfor %}
+    </div>
+
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
+                <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    </br>
+</div>
+
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4">
+
+    <!-- Search Widget -->
+    <div class="card my-4" >
+        <h5 class="card-header" >Search</h5>
+        <div class="card-body">
+            <form method='GET' action=''>
+                <div class="input-group">
+                    <input class="form-control" type="text"  name="q" placeholder="Search for..." value = "{{request.GET.q}}">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Categories</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#">Web Design</a>
+                        </li>
+                        <li>
+                            <a href="#">HTML</a>
+                        </li>
+                        <li>
+                            <a href="#">Freebies</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#">JavaScript</a>
+                        </li>
+                        <li>
+                            <a href="#">CSS</a>
+                        </li>
+                        <li>
+                            <a href="#">Tutorials</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    {% endfor %}
+    </div>
 
 </div>
-
-
-
-<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}{% if request.GET.q %} & q={{request.GET.q}} {% endif %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
-
-        {% if object_list.has_next %}
-            <a href="?page={{ object_list.next_page_number }}{% if request.GET.q %} & q={{request.GET.q}{% endif %}">next</a>
-            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-</br>
-
-
 
 {% endblock content %}
