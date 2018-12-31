@@ -30,5 +30,3 @@ source py_env/bin/activate
 ```bash
 python manage.py runserver
 ```
-
-

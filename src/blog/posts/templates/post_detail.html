@@ -7,10 +7,11 @@
 
 {% block content %}
     <div class='col-lg-8 col-md-10 mx-auto'>
+        </br>
         {% if instance.image %}
             <img src='{{instance.image.url}}' class='img-responsive'/>
         {% endif %}
-        <h1>{{title}}{% if instance.draft %}<small> <span style='color:red;'> Draft </span>{% endif %}{{instance.publish}}</small></h1>
+        <h1>{{title}}</h1><a>{% if instance.draft %}<small> <span style='color:red;'> Draft </span>{% endif %}{{instance.publish}}</small></a>
         {% if instance.user.get_full_name %}
             <p>Author:{{instance.user.get_full_name}}</p>
         {% endif %}
@@ -25,4 +26,5 @@
             </div>
         </div>
     </div>
+    </br>
 {% endblock content %}

@@ -15,6 +15,14 @@ class PostManager(models.Manager):
 def upload_location(instance, filename):
     return "%s/%s"%(instance.id, filename)
 
+
+CATEGORIES = (
+    ('none', None),
+    ('android', 'ANDROID'),
+    ('iphone', 'IPHONE'),
+)
+
+
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=100)
@@ -24,9 +32,10 @@ class Post(models.Model):
                               blank=True,
                               width_field="width_field",
                               height_field="height_field")
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
+    height_field = models.IntegerField(default=300)
+    width_field = models.IntegerField(default=750)
     content = models.TextField()
+    category = models.CharField(max_length=7, choices=CATEGORIES, default='none')
     draft = models.BooleanField(default=False)
     publish = models.DateTimeField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
